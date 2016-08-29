@@ -19,7 +19,8 @@
     "import/imports-first": 0,
     "import/no-extraneous-dependencies": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "camelcase": 0
+    "camelcase": 0,
+    "no-mixed-operators": 0,
   },
   "globals": {
     "db": true,

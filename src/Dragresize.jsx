@@ -79,6 +79,13 @@ class Dragresize extends Component {
             cy = y;
             // ay = e.pageY;
           }
+
+          if (isRatio) {
+            const bxmm = this.limitScope({ ax, ay, bx, cy }).bx;
+            cy = ay + (bxmm - ax) * ratio;
+            const cymm = this.limitScope({ ax, ay, bx, cy }).cy;
+            bx = (cymm - ay) / ratio + ax;
+          }
           break;
         case 'tl':
           diffX = m_x - x;
@@ -95,6 +102,13 @@ class Dragresize extends Component {
           } else {
             ay = y + h;
             // cy = e.pageY;
+          }
+
+          if (isRatio) {
+            const axmm = this.limitScope({ ax, ay, bx, cy }).ax;
+            ay = cy - (bx - axmm) * ratio;
+            const aymm = this.limitScope({ ax, ay, bx, cy }).ay;
+            ax = bx - (cy - aymm) / ratio;
           }
           break;
         case 'tr':
@@ -113,6 +127,13 @@ class Dragresize extends Component {
             ay = y + h;
             // cy = e.pageY;
           }
+
+          if (isRatio) {
+            const bxmm = this.limitScope({ ax, ay, bx, cy }).bx;
+            ay = cy - (bxmm - ax) * ratio;
+            const aymm = this.limitScope({ ax, ay, bx, cy }).ay;
+            bx = (cy - aymm) / ratio + ax;
+          }
           break;
         case 'bl':
           diffX = m_x - x;
@@ -129,6 +150,12 @@ class Dragresize extends Component {
           } else {
             cy = y;
             // ay = e.pageY;
+          }
+          if (isRatio) {
+            const axmm = this.limitScope({ ax, ay, bx, cy }).ax;
+            cy = ay + (bx - axmm) * ratio;
+            const cymm = this.limitScope({ ax, ay, bx, cy }).cy;
+            ax = bx - (cymm - ay) / ratio;
           }
           break;
       }
@@ -262,11 +289,11 @@ Dragresize.propTypes = {
 Dragresize.defaultProps = {
   elmX: 10,
   elmY: 10,
-  elmW: 150,
-  elmH: 100,
+  elmW: 100,
+  elmH: 150,
   isDrag: true,
   isResize: true,
-  isRatio: false,
+  isRatio: true,
   isChecked: true,
   dragScope: {
     minLeft: 10,
@@ -277,7 +304,7 @@ Dragresize.defaultProps = {
   sizeScope: {
     minWidth: 30,
     minHeight: 30,
-    maxWidth: 200,
+    maxWidth: null,
     maxHeight: null,
   },
   onMouseMove: null,
