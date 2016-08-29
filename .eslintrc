@@ -17,10 +17,13 @@
     "no-use-before-define": 0,
     "import/newline-after-import": 0,
     "import/imports-first": 0,
-    "import/no-extraneous-dependencies": 0
+    "import/no-extraneous-dependencies": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "camelcase": 0
   },
   "globals": {
     "db": true,
     "isDev": true,
+    "document": true
   }
 }

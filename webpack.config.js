@@ -6,7 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   context: __dirname,
-  entry: './src/Dragresize.jsx',
+  entry: {
+    example: './example/index.js',
+  },
   output: {
     path: path.resolve(__dirname, '/dist'),
     filename: '[name]_[hash].js',
@@ -44,7 +46,7 @@ const config = {
       manifest: require('./dist/manifest.json'),
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './example/index.html',
     }),
   ],
   devServer: {
