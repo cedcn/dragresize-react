@@ -6,7 +6,7 @@ class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      elmX: 10,
+      elmX: 150,
       elmY: 10,
       elmW: 150,
       elmH: 100,
@@ -36,6 +36,7 @@ class Example extends Component {
           elmH={this.state.elmH}
           isChecked={this.state.isChecked}
           isRatio={false}
+          minLeft={150}
           onMouseMove={({ elmX, elmY }) => { this.setState({ elmX, elmY }); }}
           onResize={({ elmX, elmY, elmW, elmH }) => { this.setState({ elmX, elmY, elmW, elmH }); }}
         />

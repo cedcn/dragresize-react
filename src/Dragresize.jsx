@@ -191,14 +191,14 @@ class Dragresize extends Component {
 
   // 限制拖拽范围
   limitDragScopeX(value) {
-    const { maxLeft, minLeft } = this.props.dragScope;
+    const { maxLeft, minLeft } = this.props;
     const max = maxLeft !== null ? maxLeft - w : null;
     const min = minLeft;
     return getScopeValue(value, max, min);
   }
 
   limitDragScopeY(value) {
-    const { maxTop, minTop } = this.props.dragScope;
+    const { maxTop, minTop } = this.props;
     const max = maxTop !== null ? maxTop - h : null;
     const min = minTop;
     return getScopeValue(value, max, min);
@@ -206,8 +206,8 @@ class Dragresize extends Component {
 
   // 限制缩放范围
   limitScope({ ax, ay, bx, cy }) {
-    const { maxLeft, minLeft, maxTop, minTop } = this.props.dragScope;
-    const { minWidth, minHeight, maxWidth, maxHeight } = this.props.sizeScope;
+    const { maxLeft, minLeft, maxTop, minTop } = this.props;
+    const { minWidth, minHeight, maxWidth, maxHeight } = this.props;
 
     const ax_max = minWidth !== null ? (x + w) - minWidth : x + w;
     const ax_min = maxWidth !== null ? (x + w) - maxWidth : minLeft;
@@ -284,8 +284,14 @@ Dragresize.propTypes = {
   isRatio: PropTypes.bool,
   isResize: PropTypes.bool,
   isChecked: PropTypes.bool,
-  dragScope: React.PropTypes.objectOf(React.PropTypes.number),
-  sizeScope: React.PropTypes.objectOf(React.PropTypes.number),
+  minLeft: React.PropTypes.number,
+  minTop: React.PropTypes.number,
+  maxLeft: React.PropTypes.number,
+  maxTop: React.PropTypes.number,
+  minWidth: React.PropTypes.number,
+  minHeight: React.PropTypes.number,
+  maxWidth: React.PropTypes.number,
+  maxHeight: React.PropTypes.number,
   onMouseMove: PropTypes.func,
   onResize: PropTypes.func,
   onMouseDown: PropTypes.func,
@@ -300,18 +306,14 @@ Dragresize.defaultProps = {
   isResize: true,
   isRatio: true,
   isChecked: true,
-  dragScope: {
-    minLeft: null,
-    minTop: null,
-    maxLeft: 1000,
-    maxTop: 600,
-  },
-  sizeScope: {
-    minWidth: 10,
-    minHeight: 10,
-    maxWidth: null,
-    maxHeight: null,
-  },
+  minLeft: null,
+  minTop: null,
+  maxLeft: 1000,
+  maxTop: 600,
+  minWidth: 10,
+  minHeight: 10,
+  maxWidth: null,
+  maxHeight: null,
   onMouseMove: null,
   onResize: null,
   onMouseDown: null,
