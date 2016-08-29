@@ -7,7 +7,7 @@
     "start": "npm run dll && npm run dev",
     "dev": "NODE_ENV=development webpack-dev-server",
     "dll": "webpack --config webpack.dll.js -p",
-    "build": "webpack -p"
+    "build": "webpack --config webpack.build.js -p"
   },
   "author": "",
   "license": "ISC",
