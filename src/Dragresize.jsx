@@ -170,6 +170,11 @@ class Dragresize extends Component {
     document.addEventListener('mouseup', this.mouseUp);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { elmX, elmY, elmW, elmH } = nextProps;
+    this.setState({ elmX, elmY, elmW, elmH });
+  }
+
   componentWillUnmount() {
     document.removeEventListener('mouseup', this.mouseUp);
   }
@@ -296,14 +301,14 @@ Dragresize.defaultProps = {
   isRatio: true,
   isChecked: true,
   dragScope: {
-    minLeft: 10,
-    minTop: 10,
+    minLeft: null,
+    minTop: null,
     maxLeft: 1000,
     maxTop: 600,
   },
   sizeScope: {
-    minWidth: 30,
-    minHeight: 30,
+    minWidth: 10,
+    minHeight: 10,
     maxWidth: null,
     maxHeight: null,
   },
