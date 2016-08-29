@@ -1,7 +1,3 @@
-export const limitDragScopeX = () => {
-
-}
-
 export const getScopeValue = (value, max, min) => {
   if (max !== null && value >= max) {
     return max;
