@@ -59,64 +59,73 @@ class Dragresize extends Component {
       let ay = y;
       let bx = x + w;
       let cy = y + h;
-
+      let diffX = 0;
+      let diffY = 0;
       // set attribute of this dragbox
       switch (seat) {
         case 'br':
-          if (e.pageX >= x) {
-            bx = e.pageX;
+          diffX = m_x - (x + w);
+          diffY = m_y - (y + h);
+          if (e.pageX - diffX >= x) {
+            bx = e.pageX - diffX;
           } else {
             bx = x;
             // ax = e.pageX;
           }
 
-          if (e.pageY >= y) {
-            cy = e.pageY;
+          if (e.pageY - diffY >= y) {
+            cy = e.pageY - diffY;
           } else {
             cy = y;
             // ay = e.pageY;
           }
           break;
         case 'tl':
-          if (e.pageX <= x + w) {
-            ax = e.pageX;
+          diffX = m_x - x;
+          diffY = m_y - y;
+          if (e.pageX - diffX <= x + w) {
+            ax = e.pageX - diffX;
           } else {
             ax = x + w;
             // bx = e.pageX;
           }
 
-          if (e.pageY <= y + h) {
-            ay = e.pageY;
+          if (e.pageY - diffY <= y + h) {
+            ay = e.pageY - diffY;
           } else {
             ay = y + h;
             // cy = e.pageY;
           }
           break;
         case 'tr':
-          if (e.pageX >= x) {
-            bx = e.pageX;
+          diffX = m_x - (x + w);
+          diffY = m_y - y;
+          if (e.pageX - diffX >= x) {
+            bx = e.pageX - diffX;
           } else {
             bx = x;
             // ax = e.pageX;
           }
 
-          if (e.pageY <= y + h) {
-            ay = e.pageY;
+          if (e.pageY - diffY <= y + h) {
+            ay = e.pageY - diffY;
           } else {
             ay = y + h;
             // cy = e.pageY;
           }
           break;
         case 'bl':
-          if (e.pageX <= x + w) {
-            ax = e.pageX;
+          diffX = m_x - x;
+          diffY = m_y - (y + h);
+          if (e.pageX - diffX <= x + w) {
+            ax = e.pageX - diffX;
           } else {
             ax = x + w;
             // bx = e.pageX;
           }
 
-          if (e.pageY >= y) {
-            cy = e.pageY;
+          if (e.pageY - diffY >= y) {
+            cy = e.pageY - diffY;
           } else {
             cy = y;
             // ay = e.pageY;
