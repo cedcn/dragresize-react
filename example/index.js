@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Dragresize from '../src/Dragresize';
 
+import './index.less';
+
 class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {
       elmX: 150,
-      elmY: 10,
+      elmY: 50,
       elmW: 150,
       elmH: 100,
-      isChecked: false,
+      isChecked: true,
+      isRatio: false,
+      isDrag: true,
+      isResize: true,
     };
 
     this.change = (e) => {
@@ -21,13 +26,23 @@ class Example extends Component {
   render() {
     return (
       <div className="example">
-        <input type="text" onChange={this.change} value={this.state.elmX} />
-        <div>X: { this.state.elmX }</div>
-        <div>Y: { this.state.elmY }</div>
-        <div>W: { this.state.elmW }</div>
-        <div>H: { this.state.elmH }</div>
+        <label htmlFor="x">修改X坐标:</label>
+        <input id="x" type="text" onChange={this.change} value={this.state.elmX} />
+        <div>X轴: { this.state.elmX }</div>
+        <div>Y轴: { this.state.elmY }</div>
+        <div>宽: { this.state.elmW }</div>
+        <div>高: { this.state.elmH }</div>
         <a href="javascript:;" onClick={() => this.setState({ isChecked: !this.state.isChecked })}>
-          {!this.state.isChecked ? '选中' : '取消'}
+          {!this.state.isChecked ? 'Checked' : 'No Checked'}
+        </a>
+        <a href="javascript:;" onClick={() => this.setState({ isRatio: !this.state.isRatio })}>
+          {!this.state.isRatio ? '按比例缩放' : '取消比例缩放'}
+        </a>
+        <a href="javascript:;" onClick={() => this.setState({ isDrag: !this.state.isDrag })}>
+          {!this.state.isDrag ? '可拖拽' : '禁止拖拽'}
+        </a>
+        <a href="javascript:;" onClick={() => this.setState({ isResize: !this.state.isResize })}>
+          {!this.state.isResize ? '可缩放' : '禁止缩放'}
         </a>
         <Dragresize
           elmX={this.state.elmX}
@@ -35,8 +50,11 @@ class Example extends Component {
           elmW={this.state.elmW}
           elmH={this.state.elmH}
           isChecked={this.state.isChecked}
-          isRatio={false}
+          isRatio={this.state.isRatio}
+          isDrag={this.state.isDrag}
+          isResize={this.state.isResize}
           minLeft={150}
+          minTop={50}
           onMouseMove={({ elmX, elmY }) => { this.setState({ elmX, elmY }); }}
           onResize={({ elmX, elmY, elmW, elmH }) => { this.setState({ elmX, elmY, elmW, elmH }); }}
         />

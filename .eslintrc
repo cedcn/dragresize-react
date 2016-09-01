@@ -21,6 +21,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "camelcase": 0,
     "no-mixed-operators": 0,
+    "no-script-url": 0
   },
   "globals": {
     "db": true,
