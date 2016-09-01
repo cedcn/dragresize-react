@@ -1,8 +1,6 @@
 #dragresize
---
 A ReactJS component to render a dragresize layer.
-###Installation
------
+##Installation
 Install dragresize with [npm](https://www.npmjs.com/):
 
 ```
@@ -15,15 +13,12 @@ For [CommonJS](http://wiki.commonjs.org/wiki/CommonJS) users:
 import Dragresize from 'dragresize';
 ```
 
-###Example
------
-
-npm install;
-
-npm start;
-
-###Props
------
+##Example
+Run:
+```console
+$ npm install; npm start
+```
+##Props
 
 | Name | Type | default | Description |
 | --- | --- | --- | --- |
