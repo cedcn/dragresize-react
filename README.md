@@ -11,6 +11,7 @@ For [CommonJS](http://wiki.commonjs.org/wiki/CommonJS) users:
 
 ```javascript
 import Dragresize from 'dragresize';
+import 'dragresize/dist/dragresize.css';
 ```
 
 ##Example
@@ -29,7 +30,7 @@ $ npm install; npm start
 | `isDrag` | `Boolean` | `true` | 是否可拖拽. |
 | `isResize` | `Boolean ` | `true` | 是否可缩放. |
 | `isRatio` | `Boolean ` | `false` | 是否按比例缩放. |
-| `isChecked` | `Boolean ` | `true` | 是否选择. |
+| `isChecked` | `Boolean ` | `true` | 是否选中. |
 | `minLeft` | `Number` | `null` | Drag Scope |
 | `minTop` | `Number` | `null` | Drag Scope |
 | `maxLeft` | `Number ` | `null` | Drag Scope |
