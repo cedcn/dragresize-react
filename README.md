@@ -11,7 +11,6 @@ For [CommonJS](http://wiki.commonjs.org/wiki/CommonJS) users:
 
 ```javascript
 import Dragresize from 'dragresize';
-import 'dragresize/dist/dragresize.css';
 ```
 
 ##Example
