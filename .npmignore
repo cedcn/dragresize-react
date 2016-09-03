@@ -1,6 +1,4 @@
 /node_modules
 npm-debug.log
-/example
-/src
 /dist/lib.js
 /dist/manifest.json

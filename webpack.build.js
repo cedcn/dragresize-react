@@ -1,7 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
   context: __dirname,
@@ -10,6 +8,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
+    libraryTarget: 'umd',
     filename: '[name].js',
   },
   resolve: {
@@ -24,21 +23,22 @@ const config = {
       { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
       {
         test: /\.less|\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css?minimize&modules&localIdentName=[local]__[hash:base64:10]!postcss!less'),
+        loader: 'style!css?modules&localIdentName=[local]__[hash:base64:10]!postcss!less',
       },
     ],
   },
   postcss: () => {
     return [autoprefixer];
   },
-  plugins: [
-    new ExtractTextPlugin('[name].css'),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-    }),
-  ],
+  externals: {
+    react: {
+      root: 'React',
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react',
+    },
+  },
+  devtool: 'source-map',
 };
 
 

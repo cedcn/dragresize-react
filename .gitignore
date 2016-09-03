@@ -1,3 +1,4 @@
 /node_modules
-/dist
+/dist/lib.js
+/dist/manifest.json
 npm-debug.log
