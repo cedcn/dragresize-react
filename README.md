@@ -1,6 +1,9 @@
-#dragresize
+# dragresize
+
 A ReactJS component to render a dragresize layer.
-##Installation
+
+## Installation
+
 Install dragresize with [npm](https://www.npmjs.com/):
 
 ```
@@ -13,14 +16,17 @@ For [CommonJS](http://wiki.commonjs.org/wiki/CommonJS) users:
 import Dragresize from "dragresize";
 ```
 
-##Example
+## Example
+
 Run:
 
 ```console
 $ npm install; npm start
 ```
 
-##Props
+[![Edit example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/Cedcn/dragresize-react/tree/master/example?fontsize=14)
+
+## Props
 
 | Name          | Type       | default | Description                     |
 | ------------- | ---------- | ------- | ------------------------------- |
