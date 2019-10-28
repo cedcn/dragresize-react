@@ -1,14 +1,14 @@
-import React, { PropTypes, Component } from 'react';
-import S_S_ from './dragresize.less';
+import React, { PropTypes, Component } from "react";
+import S_S_ from "./dragresize.less";
 
-import { getScopeValue, getltValue, computeAttr } from './util';
+import { getScopeValue, getLtValue, computeAttr } from "./util";
 let m_x; // 鼠标点击时X轴的位置
 let m_y; // 鼠标点击时Y轴的位置
 let w; // 鼠标点击时BOX的宽度
 let h; // 鼠标点击时BOX的高度
 let x; // 鼠标点击时BOX的X轴坐标
 let y; // 鼠标点击时BOX的Y轴坐标
-let seat = '';  // 角标
+let seat = ""; // 角标
 
 class Dragresize extends Component {
   constructor(props) {
@@ -19,8 +19,8 @@ class Dragresize extends Component {
     this.mouseDown = e => {
       if (e.button !== 0 || !this.props.isDrag) return;
       e.stopPropagation();
-      this.cacheMoustDownAttrs(e);
-      document.addEventListener('mousemove', this.mouseMove);
+      this.cacheMouseDownAttrs(e);
+      document.addEventListener("mousemove", this.mouseMove);
       if (this.props.onMouseDown) this.props.onMouseDown();
     };
 
@@ -30,13 +30,14 @@ class Dragresize extends Component {
       const tempY = this.limitDragScopeY(y + (e.pageY - m_y));
       this.setState({ elmX: tempX, elmY: tempY });
 
-      document.addEventListener('mouseup', this.mouseUp);
-      if (this.props.onMouseMove) this.props.onMouseMove({ elmX: tempX, elmY: tempY });
+      document.addEventListener("mouseup", this.mouseUp);
+      if (this.props.onMouseMove)
+        this.props.onMouseMove({ elmX: tempX, elmY: tempY });
     };
 
     this.mouseUp = () => {
-      document.removeEventListener('mousemove', this.mouseMove);
-      document.removeEventListener('mousemove', this.moveResize);
+      document.removeEventListener("mousemove", this.mouseMove);
+      document.removeEventListener("mousemove", this.moveResize);
     };
 
     //
@@ -45,8 +46,8 @@ class Dragresize extends Component {
       return e => {
         e.stopPropagation();
         seat = s;
-        this.cacheMoustDownAttrs(e);
-        document.addEventListener('mousemove', this.moveResize);
+        this.cacheMouseDownAttrs(e);
+        document.addEventListener("mousemove", this.moveResize);
       };
     };
 
@@ -63,7 +64,7 @@ class Dragresize extends Component {
       let diffY = 0;
       // set attribute of this dragbox
       switch (seat) {
-        case 'br':
+        case "br":
           diffX = m_x - (x + w);
           diffY = m_y - (y + h);
           if (e.pageX - diffX >= x) {
@@ -87,7 +88,7 @@ class Dragresize extends Component {
             bx = (cymm - ay) / ratio + ax;
           }
           break;
-        case 'tl':
+        case "tl":
           diffX = m_x - x;
           diffY = m_y - y;
           if (e.pageX - diffX <= x + w) {
@@ -111,7 +112,7 @@ class Dragresize extends Component {
             ax = bx - (cy - aymm) / ratio;
           }
           break;
-        case 'tr':
+        case "tr":
           diffX = m_x - (x + w);
           diffY = m_y - y;
           if (e.pageX - diffX >= x) {
@@ -135,7 +136,7 @@ class Dragresize extends Component {
             bx = (cy - aymm) / ratio + ax;
           }
           break;
-        case 'bl':
+        case "bl":
           diffX = m_x - x;
           diffY = m_y - (y + h);
           if (e.pageX - diffX <= x + w) {
@@ -165,9 +166,8 @@ class Dragresize extends Component {
     };
   }
 
-
   componentDidMount() {
-    document.addEventListener('mouseup', this.mouseUp);
+    document.addEventListener("mouseup", this.mouseUp);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -176,11 +176,11 @@ class Dragresize extends Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mouseup', this.mouseUp);
+    document.removeEventListener("mouseup", this.mouseUp);
   }
 
   // 缓存拖动或缩放之前的状态
-  cacheMoustDownAttrs(e) {
+  cacheMouseDownAttrs(e) {
     m_x = e.pageX;
     m_y = e.pageY;
     x = this.state.elmX;
@@ -209,23 +209,25 @@ class Dragresize extends Component {
     const { maxLeft, minLeft, maxTop, minTop } = this.props;
     const { minWidth, minHeight, maxWidth, maxHeight } = this.props;
 
-    const ax_max = minWidth !== null ? (x + w) - minWidth : x + w;
-    const ax_min = maxWidth !== null ? (x + w) - maxWidth : minLeft;
+    const ax_max = minWidth !== null ? x + w - minWidth : x + w;
+    const ax_min = maxWidth !== null ? x + w - maxWidth : minLeft;
 
-    const ay_max = minHeight !== null ? (y + h) - minHeight : y + h;
-    const ay_min = maxHeight !== null ? (y + h) - maxHeight : minTop;
+    const ay_max = minHeight !== null ? y + h - minHeight : y + h;
+    const ay_min = maxHeight !== null ? y + h - maxHeight : minTop;
 
-    const bx_max = maxWidth !== null ? getltValue(maxLeft, x + maxWidth) : maxLeft;
+    const bx_max =
+      maxWidth !== null ? getLtValue(maxLeft, x + maxWidth) : maxLeft;
     const bx_min = minWidth !== null ? x + minWidth : x;
 
-    const cy_max = maxHeight !== null ? getltValue(maxTop, y + maxHeight) : maxTop;
+    const cy_max =
+      maxHeight !== null ? getLtValue(maxTop, y + maxHeight) : maxTop;
     const cy_min = minHeight !== null ? y + minHeight : y;
 
     return {
       ax: getScopeValue(ax, ax_max, ax_min),
       ay: getScopeValue(ay, ay_max, ay_min),
       bx: getScopeValue(bx, bx_max, bx_min),
-      cy: getScopeValue(cy, cy_max, cy_min),
+      cy: getScopeValue(cy, cy_max, cy_min)
     };
   }
 
@@ -237,15 +239,27 @@ class Dragresize extends Component {
       left: elmX,
       top: elmY,
       width: elmW,
-      height: elmH,
+      height: elmH
     };
 
     const handleList = isResize ? (
       <div className={S_S_.handle_list}>
-        <div className={`${S_S_.handle_btn} ${S_S_.handle_tl}`} onMouseDown={this.resizeHandle('tl')} />
-        <div className={`${S_S_.handle_btn} ${S_S_.handle_tr}`} onMouseDown={this.resizeHandle('tr')} />
-        <div className={`${S_S_.handle_btn} ${S_S_.handle_bl}`} onMouseDown={this.resizeHandle('bl')} />
-        <div className={`${S_S_.handle_btn} ${S_S_.handle_br}`} onMouseDown={this.resizeHandle('br')} />
+        <div
+          className={`${S_S_.handle_btn} ${S_S_.handle_tl}`}
+          onMouseDown={this.resizeHandle("tl")}
+        />
+        <div
+          className={`${S_S_.handle_btn} ${S_S_.handle_tr}`}
+          onMouseDown={this.resizeHandle("tr")}
+        />
+        <div
+          className={`${S_S_.handle_btn} ${S_S_.handle_bl}`}
+          onMouseDown={this.resizeHandle("bl")}
+        />
+        <div
+          className={`${S_S_.handle_btn} ${S_S_.handle_br}`}
+          onMouseDown={this.resizeHandle("br")}
+        />
       </div>
     ) : null;
 
@@ -264,9 +278,7 @@ class Dragresize extends Component {
         style={style}
         onMouseDown={this.mouseDown}
       >
-        <div className={S_S_.content}>
-          {this.props.children}
-        </div>
+        <div className={S_S_.content}>{this.props.children}</div>
         {handleList}
         {borderList}
       </div>
@@ -294,7 +306,7 @@ Dragresize.propTypes = {
   maxHeight: React.PropTypes.number,
   onMouseMove: PropTypes.func,
   onResize: PropTypes.func,
-  onMouseDown: PropTypes.func,
+  onMouseDown: PropTypes.func
 };
 
 Dragresize.defaultProps = {
@@ -316,7 +328,7 @@ Dragresize.defaultProps = {
   maxHeight: null,
   onMouseMove: null,
   onResize: null,
-  onMouseDown: null,
+  onMouseDown: null
 };
 
 export default Dragresize;

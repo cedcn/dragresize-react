@@ -52,6 +52,7 @@ const config = {
   devServer: {
     devtool: true,
     colors: true,
+    port: '8888',
     progress: true,
     host: '0.0.0.0',
   },

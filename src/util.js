@@ -7,13 +7,12 @@ export const getScopeValue = (value, max, min) => {
   return value;
 };
 
-export const getltValue = (...args) => {
+export const getLtValue = (...args) => {
   return args.reduce((pre, cur) => {
     if (cur === null) return pre;
     return Math.min(pre, cur);
   }, 10000000);
 };
-
 
 export const computeAttr = ({ ax, ay, bx, cy }) => {
   return {
